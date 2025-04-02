@@ -4,25 +4,26 @@
 ## NOTE: This is currently used by /examples/gridvania.ldtk. Please do not edit directly.
 ## Creates Light nodes on all 'LightTest' entities.
 
-const Light = preload("res://examples/light.tscn")
+const Light: PackedScene = preload("res://examples/light.tscn")
 
 # Used to update entity reference
-const LDTKUtil = preload("res://addons/ldtk-importer/src/util/util.gd")
+const LDTKUtil: Script = preload("res://addons/ldtk-importer/src/util/util.gd")
+
 
 func post_import(entity_layer: LDTKEntityLayer) -> LDTKEntityLayer:
 	# This is used to supply a index suffix to the node name (e.g. "Light2", "Light3", etc.)
 	var spawn_count: int = 0
 
 	# Loop though the 'entities' Dictionary on the EntityLayer
-	for entity in entity_layer.entities:
+	for entity: Dictionary in entity_layer.entities:
 		# Find 'LightTest' entity
 		if entity.identifier == "LightTest":
 			# Create a new Light instance.
-			var light = Light.instantiate()
+			var light: Light2D = Light.instantiate()
 
 			# Copy fields over to the new instance.
 			light.position = entity.position
-			light.scale = Vector2(entity.size) / Vector2(64,64)
+			light.scale = Vector2(entity.size) / Vector2(64, 64)
 			light.color = entity.smart_color
 			light.energy = entity.fields.Energy
 

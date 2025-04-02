@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bw0wy7yp6jniw"]
 
 [ext_resource type="PackedScene" uid="uid://cpa3ioxd6crke" path="res://examples/light.tscn" id="2_jap8n"]
-[ext_resource type="Script" path="res://examples/mouse_light.gd" id="2_px2gi"]
+[ext_resource type="Script" uid="uid://dvrlbciponbln" path="res://examples/mouse_light.gd" id="2_px2gi"]
 [ext_resource type="PackedScene" uid="uid://xxx8r8vuswa" path="res://examples/gridvania/example_gridvania.ldtk" id="3_0pwam"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2ueii"]

@@ -90,9 +90,9 @@ Example post-import scripts are included to cover common use cases; feel free to
 @tool
 
 func post_import(tilesets: Dictionary) -> Dictionary:
-    # Behaviour goes here
+	# Behaviour goes here
 
-    return tilesets
+	return tilesets
 ```
 
 ### Post-Import: Entity Layer
@@ -100,13 +100,13 @@ func post_import(tilesets: Dictionary) -> Dictionary:
 @tool
 
 func post_import(entity_layer: LDTKEntityLayer) -> LDTKEntityLayer:
-    var definition: Dictionary = entity_layer.definition
-    var entities: Array = entity_layer.entities
-    for entity in entities:
-        # Perform operations here
-        pass
+	var definition: Dictionary = entity_layer.definition
+	var entities: Array = entity_layer.entities
+	for entity in entities:
+		# Perform operations here
+		pass
 
-    return entity_layer
+	return entity_layer
 ```
 
 ### Post-Import: Level
@@ -114,9 +114,9 @@ func post_import(entity_layer: LDTKEntityLayer) -> LDTKEntityLayer:
 @tool
 
 func post_import(level: LDTKLevel) -> LDTKLevel:
-    # Behaviour goes here
+	# Behaviour goes here
 
-    return level
+	return level
 ```
 
 ### Post-Import: World
@@ -124,9 +124,9 @@ func post_import(level: LDTKLevel) -> LDTKLevel:
 @tool
 
 func post_import(world: LDTKWorld) -> LDTKWorld:
-    # Behaviour goes here
+	# Behaviour goes here
 
-    return world
+	return world
 ```
 
 # ❓FAQ
@@ -157,7 +157,7 @@ This was quite tricky to get right, and still needs some testing! I might expand
 LDTK uses instance ids to refer to unique instances of levels, entities, etc. They look this:
 ```json
 {
-    "iid": "c27f1f10-3b70-11ee-8b24-732c4cff2bf2"
+	"iid": "c27f1f10-3b70-11ee-8b24-732c4cff2bf2"
 }
 ```
 
@@ -184,23 +184,23 @@ const Util = preload("res://addons/ldtk-importer/src/util/util.gd")
 const SceneTest = preload("res://node_test.tscn")
 
 func post_import(entity_layer: LDTKEntityLayer) -> LDTKEntityLayer:
-    var entities: Array = entity_layer.entities
-    for entity in entities:
-        # Create entity node (simple example)
-        var scene = SceneTest.instantiate()
-        entity_layer.add_child(scene)
+	var entities: Array = entity_layer.entities
+	for entity in entities:
+		# Create entity node (simple example)
+		var scene = SceneTest.instantiate()
+		entity_layer.add_child(scene)
 
-        # Update 'iid' to reference this entity node
-        Util.update_instance_reference(entity.iid, scene)
+		# Update 'iid' to reference this entity node
+		Util.update_instance_reference(entity.iid, scene)
 
-        # Add unresolved reference (e.g. EntityRef field)
-        if "Entity_ref" in entity.fields:
-            var ref = entity.fields.Entity_ref
-            if ref != null:
-                scene.ref = ref
-                Util.add_unresolved_reference(scene, "ref")
+		# Add unresolved reference (e.g. EntityRef field)
+		if "Entity_ref" in entity.fields:
+			var ref = entity.fields.Entity_ref
+			if ref != null:
+				scene.ref = ref
+				Util.add_unresolved_reference(scene, "ref")
 
-    return entity_layer
+	return entity_layer
 ```
 
 Here is the example **SceneTest** scene:
